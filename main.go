@@ -1,19 +1,21 @@
-package impwellbeing
+package main
 
 import (
 	"git.icod.de/dalu/ginpongo2v3"
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
+	"github.com/impwellbeing/controllers"
 )
 
-func StartImpWellbeing() error {
+func main() {
 	app := gin.Default()
-	app.Use(static.Serve("/static", static.LocalFile("selfservice/static", false)))
+	app.Use(static.Serve("/static", static.LocalFile("static", false)))
 	app.HTMLRender = ginpongo2v3.New("default", "views", gin.IsDebugging())
 
-	// app.GET("/auth", authController.ShowLogin)
+	landingController := controllers.NewLandingController()
+
+	app.GET("/", landingController.ShowLanding)
 
 	_ = app.Run()
 
-	return nil
 }
