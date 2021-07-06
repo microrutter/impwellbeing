@@ -19,6 +19,6 @@ func (c *LandingController) ShowLanding(ctx *gin.Context) {
 	uuid, _ := uuid.NewV4()
 
 	ctx.HTML(http.StatusOK, "landing", pongo2.Context{
-		"context": uuid,
+		"context": uuid.String(),
 	})
 }
