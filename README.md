@@ -13,3 +13,7 @@ more of an active role in looking after their employees.
 ## Running the application locally
 
 go run main.go
+
+## To bring up the additional dependencies
+
+docker-compose -f database.yml up
