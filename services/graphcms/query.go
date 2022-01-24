@@ -19,15 +19,7 @@ type Card struct {
 }
 
 func LandingCards (ctx *gin.Context) CardResponse {
-	CmsUrl, cmsExists := os.LookupEnv("CMSUrl")
-	if !cmsExists {
-		CmsUrl = config.CmsUrl
-	}
-	CmsApiKey, keyExists := os.LookupEnv("CMSApiKey")
-	if !keyExists {
-		CmsApiKey = config.CmsApiKey
-	}
-	graphqlClient := graphql.NewClient(CmsUrl)
+	graphqlClient := graphql.NewClient(config.CMSUrl())
 	graphqlRequest := graphql.NewRequest(`
 		query MyQuery {
 			landingPageCardsPlural {
@@ -39,7 +31,7 @@ func LandingCards (ctx *gin.Context) CardResponse {
 		}
 	`)
 
-	graphqlRequest.Header.Set("Authorization", fmt.Sprintf("Bearer %s", CmsApiKey))
+	graphqlRequest.Header.Set("Authorization", fmt.Sprintf("Bearer %s", config.CMSApiKey()))
 	var graphqlResponse CardResponse
 	if err := graphqlClient.Run(ctx, graphqlRequest, &graphqlResponse); err != nil {
         panic(err)
