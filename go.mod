@@ -10,6 +10,7 @@ require (
 	github.com/google/go-cmp v0.5.6 // indirect
 	github.com/jinzhu/gorm v1.9.16
 	github.com/lib/pq v1.10.2 // indirect
+	github.com/machinebox/graphql v0.2.2 // indirect
 	github.com/mattn/go-sqlite3 v2.0.1+incompatible // indirect
 	github.com/nu7hatch/gouuid v0.0.0-20131221200532-179d4d0c4d8d
 	go.mongodb.org/mongo-driver v1.5.4
