@@ -1,33 +1,14 @@
-
 {% extends "templates/info-header.html.twig" %}
 {% block content %}
-        <div class="hero-body">
-            <div class="container has-text-centered">
-                <div class="column is-6 is-offset-3">
-                    <h1 class="title">
-                        Coming Soon, Help The Conversation Grow With ImpWellbeing Surveys
-                    </h1>
-                    <div class="box">
-                        <p>
-                            Mental health problems are all too common in the workplace and it is the leading cause of sickness absence. 
-                            A staggering 70 million work days are lost each year due to mental health problems in the UK, 
-                            costing employers approximately £2.4 billion per year.
-                        </p>
-                        </br>
-                        <p>
-                            Employers need to look after Employees mental health and the ability to have open, 
-                            authentic conversations about mental health in the workplace is vital. 
-                            This is more important than ever as we recover from the impact of the pandemic.
-                        </p>
-                    </div>
-                    </br> 
-                    <p class="control">
-                        <a class="button is-info" target="_self" href="/survey/{{context}}">
-                            Take Individual Survey 
-                        </a>
-                    </p>                  
-                </div>
-            </div>
-        </div>
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <div class="columns">
+        {% for card in cards %}
+          <div class="column">
+            {% include "templates/card.html.twig" %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 {% endblock %}
-    
