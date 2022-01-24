@@ -2,7 +2,6 @@ package graphcms
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/impwellbeing/config"
