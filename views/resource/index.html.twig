@@ -1,0 +1,39 @@
+{% extends "templates/info-header.html.twig" %}
+{% block content %}
+  {% for resource in resources %}
+    <div class="section mt-6">
+        <div class="columns has-background-primary-light">
+            <div class="column">
+                <figure class="image is-2by2">
+                    <img src={{ resource.Image.url }} alt={{ resource.Document.fileName }}>
+                </figure>
+            </div>
+            <div class="column has-text-centered is-half">
+                <div class="content">
+                    <h1 class="heading is-size-1">{{ resource.Title }}</h1>
+                    <p>{{ resource.Content1 }}</p>
+                    </br>
+                    <p>{{ resource.Content2 }}</p>
+                    </br>
+                    <p>{{ resource.Content3 }}</p>
+                    </br>
+                    <a href={{ resource.Document.url }} class="button is-primary is-rounded is-large" target="_blank"> {{ resource.Document.fileName }} </a>
+                </div>
+            </div>
+            <div class="column">
+            {% if resource.HasLink %}
+                <div class="content">
+                    <p class="heading is-size-3">External Resources:</p>
+                    <ol>
+                        <li><a href={{ resource.Link1 }}>{{ resource.Link1 }}</a></li>
+                        <li><a href={{ resource.Link2 }}>{{ resource.Link2 }}</a></li>
+                        <li><a href={{ resource.Link3 }}>{{ resource.Link3 }}</a></li>
+                    </ol>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+        
+    </div>
+  {% endfor %}
+{% endblock %}

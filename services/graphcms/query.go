@@ -8,21 +8,15 @@ import (
 	"github.com/machinebox/graphql"
 )
 
-type CardResponse struct {
-	Cards []Card `json:"landingPageCardsPlural"`
-}
-
-type Card struct {
-	Content string `json:"content"`
-	Image map[string]string `json:"image"`
-}
-
 func LandingCards (ctx *gin.Context) CardResponse {
 	graphqlClient := graphql.NewClient(config.CMSUrl())
 	graphqlRequest := graphql.NewRequest(`
 		query MyQuery {
 			landingPageCardsPlural {
+			title
 			content
+			content2
+			content3
 			image {
 				url
 			}
@@ -32,6 +26,39 @@ func LandingCards (ctx *gin.Context) CardResponse {
 
 	graphqlRequest.Header.Set("Authorization", fmt.Sprintf("Bearer %s", config.CMSApiKey()))
 	var graphqlResponse CardResponse
+	if err := graphqlClient.Run(ctx, graphqlRequest, &graphqlResponse); err != nil {
+        panic(err)
+    }
+
+	return graphqlResponse
+}
+
+func ResourceCards (ctx *gin.Context) ResourceResponse {
+	graphqlClient := graphql.NewClient(config.CMSUrl())
+	graphqlRequest := graphql.NewRequest(`
+		query MyQuery {
+			resourcesPlural {
+				title
+				content1
+				content2
+				content3
+				document {
+				  fileName
+				  url
+				}
+				image {
+				  url
+				}
+				link1
+				link2
+				link3
+				hasLink
+			  }
+		}
+	`)
+
+	graphqlRequest.Header.Set("Authorization", fmt.Sprintf("Bearer %s", config.CMSApiKey()))
+	var graphqlResponse ResourceResponse
 	if err := graphqlClient.Run(ctx, graphqlRequest, &graphqlResponse); err != nil {
         panic(err)
     }

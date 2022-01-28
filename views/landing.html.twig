@@ -1,14 +1,36 @@
 {% extends "templates/info-header.html.twig" %}
 {% block content %}
-  <div class="hero-body">
-    <div class="container has-text-centered">
-      <div class="columns">
+  <section class="company section is-large has-text-centered">
+   <a href="/resource" class="button is-primary is-rounded is-large" target="_self"> Resources </a>
+  </section>
+    <section class="section is-medium">
+        <div class="columns">
         {% for card in cards %}
-          <div class="column">
-            {% include "templates/card.html.twig" %}
-          </div>
+        <div class="column">
+            <div class="card">
+            <div class="card-header">
+                <div class="card-header-title is-centered">
+                {{ card.Title }}
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="media">
+                <div class="media-left">
+                <figure class="image is-48x48">
+                    <img src={{ card.Image.url }} alt={{ card.Title }}>
+                </figure>
+                </div>
+                <div class="media-content">
+                  <p class="subtitle is-6">{{ card.Content1 }}</p>
+                  <p class="subtitle is-6">{{ card.Content2 }}</p>
+                  <p class="subtitle is-6">{{ card.Content3 }}</p>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
         {% endfor %}
-      </div>
-    </div>
-  </div>
+        </div>
+        
+    </section>
 {% endblock %}

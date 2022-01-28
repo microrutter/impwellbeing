@@ -13,8 +13,10 @@ func main() {
 	app.HTMLRender = ginpongo2v3.New("default", "views", gin.IsDebugging())
 
 	landingController := controllers.NewLandingController()
+	resourceController := controllers.NewResourceController()
 
 	app.GET("/", landingController.ShowLanding)
+	app.GET("/resource", resourceController.ShowResource)
 
 	_ = app.Run()
 
