@@ -1,6 +1,9 @@
 package main
 
 import (
+	"log"
+	"os"
+
 	"git.icod.de/dalu/ginpongo2v3"
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
@@ -8,7 +11,13 @@ import (
 )
 
 func main() {
-	app := gin.Default()
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		log.Fatal("$PORT must be set")
+	}
+
+	app := gin.New()
 	app.Use(static.Serve("/static", static.LocalFile("static", false)))
 	app.HTMLRender = ginpongo2v3.New("default", "views", gin.IsDebugging())
 
@@ -18,6 +27,6 @@ func main() {
 	app.GET("/", landingController.ShowLanding)
 	app.GET("/resource", resourceController.ShowResource)
 
-	_ = app.Run()
+	_ = app.Run(":" + port)
 
 }
