@@ -8,7 +8,7 @@ import (
 	"github.com/machinebox/graphql"
 )
 
-func LandingCards (ctx *gin.Context) CardResponse {
+func LandingCards(ctx *gin.Context) CardResponse {
 	graphqlClient := graphql.NewClient(config.CMSUrl())
 	graphqlRequest := graphql.NewRequest(`
 		query MyQuery {
@@ -27,13 +27,13 @@ func LandingCards (ctx *gin.Context) CardResponse {
 	graphqlRequest.Header.Set("Authorization", fmt.Sprintf("Bearer %s", config.CMSApiKey()))
 	var graphqlResponse CardResponse
 	if err := graphqlClient.Run(ctx, graphqlRequest, &graphqlResponse); err != nil {
-        panic(err)
-    }
+		panic(err)
+	}
 
 	return graphqlResponse
 }
 
-func ResourceCards (ctx *gin.Context) ResourceResponse {
+func ResourceCards(ctx *gin.Context) ResourceResponse {
 	graphqlClient := graphql.NewClient(config.CMSUrl())
 	graphqlRequest := graphql.NewRequest(`
 		query MyQuery {
@@ -60,8 +60,34 @@ func ResourceCards (ctx *gin.Context) ResourceResponse {
 	graphqlRequest.Header.Set("Authorization", fmt.Sprintf("Bearer %s", config.CMSApiKey()))
 	var graphqlResponse ResourceResponse
 	if err := graphqlClient.Run(ctx, graphqlRequest, &graphqlResponse); err != nil {
-        panic(err)
-    }
+		panic(err)
+	}
+
+	return graphqlResponse
+}
+
+func GetAllBlog(ctx *gin.Context) BlogResponse {
+	graphqlClient := graphql.NewClient(config.CMSUrl())
+	graphqlRequest := graphql.NewRequest(`
+		query MyQuery {
+			blogs(orderBy: publishedAt_ASC) {
+			title
+			content {
+				html
+			}
+			dateCreated
+			titleImage {
+				url
+			}
+			}
+		}
+	`)
+
+	graphqlRequest.Header.Set("Authorization", fmt.Sprintf("Bearer %s", config.CMSApiKey()))
+	var graphqlResponse BlogResponse
+	if err := graphqlClient.Run(ctx, graphqlRequest, &graphqlResponse); err != nil {
+		panic(err)
+	}
 
 	return graphqlResponse
 }
