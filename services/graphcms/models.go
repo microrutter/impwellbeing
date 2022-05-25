@@ -34,10 +34,13 @@ type Content struct {
 }
 
 type Blog struct {
+	Id          *string            `json:"id"`
 	Title       *string            `json:"title"`
-	Content     []Content          `json:"content"`
+	Content     *[]Content         `json:"content"`
 	DateCreated *string            `json:"dateCreated"`
 	Image       *map[string]string `json:"titleImage"`
+	Excerpt     *string            `json:"excerpt"`
+	Label       *string            `json:"label"`
 }
 
 type BlogResponse struct {

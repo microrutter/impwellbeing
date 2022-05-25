@@ -66,15 +66,13 @@ func ResourceCards(ctx *gin.Context) ResourceResponse {
 	return graphqlResponse
 }
 
-func GetAllBlog(ctx *gin.Context) BlogResponse {
+func GetAllBlogs(ctx *gin.Context) BlogResponse {
 	graphqlClient := graphql.NewClient(config.CMSUrl())
 	graphqlRequest := graphql.NewRequest(`
 		query MyQuery {
 			blogs(orderBy: publishedAt_ASC) {
+			id
 			title
-			content {
-				html
-			}
 			dateCreated
 			titleImage {
 				url

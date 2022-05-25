@@ -23,9 +23,11 @@ func main() {
 
 	landingController := controllers.NewLandingController()
 	resourceController := controllers.NewResourceController()
+	blogController := controllers.NewBlogController()
 
 	app.GET("/", landingController.ShowLanding)
 	app.GET("/resource", resourceController.ShowResource)
+	app.GET("/blog", blogController.ShowBlogIndex)
 
 	_ = app.Run(":" + port)
 
