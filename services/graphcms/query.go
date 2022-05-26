@@ -71,12 +71,14 @@ func GetAllBlogs(ctx *gin.Context) BlogResponse {
 	graphqlRequest := graphql.NewRequest(`
 		query MyQuery {
 			blogs(orderBy: publishedAt_ASC) {
-			id
-			title
-			dateCreated
-			titleImage {
-				url
-			}
+				id
+				title
+				dateCreated
+				titleImage {
+					url
+				}
+				label
+				excerpt
 			}
 		}
 	`)

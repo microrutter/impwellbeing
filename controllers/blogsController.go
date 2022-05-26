@@ -13,16 +13,16 @@ import (
 type BlogController struct {
 }
 
-func NewBlogController() *ResourceController {
-	return &ResourceController{}
+func NewBlogController() *BlogController {
+	return &BlogController{}
 }
 
-func (c *ResourceController) ShowBlogIndex(ctx *gin.Context) {
+func (c *BlogController) ShowBlogIndex(ctx *gin.Context) {
 	uuid, _ := uuid.NewV4()
 	ResourceList := graphcms.GetAllBlogs(ctx)
 
-	ctx.HTML(http.StatusOK, "resource/index", pongo2.Context{
-		"context":   uuid.String(),
-		"resources": ResourceList.Blogs,
+	ctx.HTML(http.StatusOK, "blog/index", pongo2.Context{
+		"context": uuid.String(),
+		"blogs":   ResourceList.Blogs,
 	})
 }
