@@ -28,6 +28,7 @@ func main() {
 	app.GET("/", landingController.ShowLanding)
 	app.GET("/resource", resourceController.ShowResource)
 	app.GET("/blog", blogController.ShowBlogIndex)
+	app.GET("/blog/:postId", blogController.GetPost)
 
 	_ = app.Run(":" + port)
 

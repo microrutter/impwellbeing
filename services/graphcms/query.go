@@ -91,3 +91,32 @@ func GetAllBlogs(ctx *gin.Context) BlogResponse {
 
 	return graphqlResponse
 }
+
+func GetBlog(ctx *gin.Context) BlogResponseSingle {
+	graphqlClient := graphql.NewClient(config.CMSUrl())
+	graphqlRequest := graphql.NewRequest(`
+		query ($id: ID!) {
+			blog(where: {id: $id}) {
+				title
+				dateCreated
+				titleImage {
+					url
+				}
+				label
+				content {
+				    markdown
+				}
+			}
+		}
+	`)
+
+	graphqlRequest.Var("id", ctx.Param("postId"))
+
+	graphqlRequest.Header.Set("Authorization", fmt.Sprintf("Bearer %s", config.CMSApiKey()))
+	var graphqlResponse BlogResponseSingle
+	if err := graphqlClient.Run(ctx, graphqlRequest, &graphqlResponse); err != nil {
+		panic(err)
+	}
+
+	return graphqlResponse
+}

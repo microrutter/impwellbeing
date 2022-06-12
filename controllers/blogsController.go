@@ -26,3 +26,13 @@ func (c *BlogController) ShowBlogIndex(ctx *gin.Context) {
 		"blogs":   ResourceList.Blogs,
 	})
 }
+
+func (c *BlogController) GetPost(ctx *gin.Context) {
+	uuid, _ := uuid.NewV4()
+	ResourceList := graphcms.GetBlog(ctx)
+
+	ctx.HTML(http.StatusOK, "blog/post", pongo2.Context{
+		"context":    uuid.String(),
+		"SingleBlog": ResourceList.SingleBlog,
+	})
+}

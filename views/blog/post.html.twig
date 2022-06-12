@@ -1,0 +1,75 @@
+{% extends "templates/info-header.html.twig" %}
+{% block content %}
+
+     <!-- this is the title section -- this can include a header image
+	 if this section isn't big enough, add a div with the "section" class -->
+    <div class="header-content">
+      <section class="hero is-light">
+        <div class="hero-body">
+        <div class="container has-text-centered" style="font-family: 'Rock Salt', cursive;">
+            <h1 class="title is-1 is-spaced">
+                {{ SingleBlog.Title }}
+            </h1>
+            <h3 class="subtitle is-3 tag is-info">
+                <i>{{ SingleBlog.Label }}</i>
+            </h3>
+        </div>
+        </div>
+      </section>
+    </div>
+    <!-- end of title section -->
+
+    <!-- this is the main page content -->
+    <div class="main-content">
+      <div class="container">
+        <div class="columns is-multiline is-centered">	  
+            <!-- posts (image length should be 400; height can be whatever) -->
+            <div class="column is-8">
+                <div class="box">
+                    
+                <div class="content-wrapper">
+                    {% for content in SingleBlog.Content %}
+                        <p>{{ content.Html }}</p>
+                    {% endfor %}
+                </div>
+                <div class="end-post-details">
+                    <div class="is-pulled-left">
+                        <i>November 28, 2017 by <a>Author</a></i>
+                    </div>
+                    <div class="is-pulled-right">
+                        <a>#blog</a> <a>#me</a> <a>#fun</a>
+                    </div>
+                </div>
+                <hr/>
+                <div class="author-content">
+                    <article class="media">
+                        <div class="media-left">
+                            <figure class="image is-64x64">
+                                <img src="http://bulma.io/images/placeholders/128x128.png" alt="Image">
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <div class="content">
+                                <strong>Author</strong>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis. Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <hr/>
+                <div class="end-content-nav-wrapper">
+                    <div class="is-pulled-left">
+                        <a href="#">
+                            <i class="fa fa-angle-double-left" aria-hidden="true"> Back to Home</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- post should end here --> 
+
+            <!-- end of post column -->
+        </div>
+      </div>
+    </div>
+    <!-- end of main page content -->
+{% endblock %}

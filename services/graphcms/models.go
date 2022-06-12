@@ -30,7 +30,7 @@ type Resource struct {
 }
 
 type Content struct {
-	Html *string `json:"html"`
+	Html *string `json:"markdown"`
 }
 
 type Blog struct {
@@ -45,4 +45,8 @@ type Blog struct {
 
 type BlogResponse struct {
 	Blogs []Blog `json:"blogs"`
+}
+
+type BlogResponseSingle struct {
+	SingleBlog Blog `json:"blog"`
 }
