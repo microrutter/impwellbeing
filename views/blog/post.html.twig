@@ -3,41 +3,48 @@
 
      <!-- this is the title section -- this can include a header image
 	 if this section isn't big enough, add a div with the "section" class -->
-    <div class="header-content">
-      <section class="hero is-light">
-        <div class="hero-body">
-        <div class="container has-text-centered" style="font-family: 'Rock Salt', cursive;">
-            <h1 class="title is-1 is-spaced">
-                {{ SingleBlog.Title }}
-            </h1>
-            <h3 class="subtitle is-3 tag is-info">
-                <i>{{ SingleBlog.Label }}</i>
-            </h3>
-        </div>
-        </div>
-      </section>
-    </div>
+    
+    
+    
     <!-- end of title section -->
 
     <!-- this is the main page content -->
     <div class="main-content">
+      
       <div class="container">
+        <section class="hero is-light mt-6">
+            <div class="hero-body">
+                <div class="columns has-background-primary-light">
+                    <article class="columns featured">
+                        <div class="column is-one-quarter post-img ">
+                            <img src={{ SingleBlog.Image.url }} alt="">
+                        </div>
+                        <div class="column is-5 featured-content va">
+                            <div>
+                            
+                                <h1 class="title is-1">{{ SingleBlog.Title }}</h1>
+                            
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
         <div class="columns is-multiline is-centered">	  
             <!-- posts (image length should be 400; height can be whatever) -->
             <div class="column is-8">
-                <div class="box">
                     
-                <div class="content-wrapper">
+                <div class="content-wrapper mt-6">
                     {% for content in SingleBlog.Content %}
-                        <p>{{ content.Html }}</p>
+                        <p>{{ content.Html }}</p><br/>
                     {% endfor %}
                 </div>
                 <div class="end-post-details">
                     <div class="is-pulled-left">
-                        <i>November 28, 2017 by <a>Author</a></i>
+                        <i>{{ SingleBlog.DateCreated }} by <a>{{ SingleBlog.Author.Name }}</a></i>
                     </div>
                     <div class="is-pulled-right">
-                        <a>#blog</a> <a>#me</a> <a>#fun</a>
+                        <a>#{{ SingleBlog.Label }}</a>
                     </div>
                 </div>
                 <hr/>
@@ -45,25 +52,18 @@
                     <article class="media">
                         <div class="media-left">
                             <figure class="image is-64x64">
-                                <img src="http://bulma.io/images/placeholders/128x128.png" alt="Image">
+                                <img src={{ SingleBlog.Author.Image.url }} alt="Image">
                             </figure>
                         </div>
                         <div class="media-content">
                             <div class="content">
-                                <strong>Author</strong>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis. Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet.</p>
+                                <strong>{{ SingleBlog.Author.Name }}</strong>
+                                <p>{{ SingleBlog.Author.Description }}</p>
                             </div>
                         </div>
                     </article>
                 </div>
                 <hr/>
-                <div class="end-content-nav-wrapper">
-                    <div class="is-pulled-left">
-                        <a href="#">
-                            <i class="fa fa-angle-double-left" aria-hidden="true"> Back to Home</i>
-                        </a>
-                    </div>
-                </div>
             </div>
             <!-- post should end here --> 
 

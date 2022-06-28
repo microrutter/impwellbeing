@@ -106,6 +106,13 @@ func GetBlog(ctx *gin.Context) BlogResponseSingle {
 				content {
 				    markdown
 				}
+				author {
+					authorName
+					authorDescription
+					authorImage {
+					  url
+					}
+				}
 			}
 		}
 	`)

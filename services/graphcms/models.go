@@ -33,6 +33,12 @@ type Content struct {
 	Html *string `json:"markdown"`
 }
 
+type Author struct {
+	Name        *string            `json:"authorName"`
+	Description *string            `json:"authorDescription"`
+	Image       *map[string]string `json:"authorImage"`
+}
+
 type Blog struct {
 	Id          *string            `json:"id"`
 	Title       *string            `json:"title"`
@@ -41,6 +47,7 @@ type Blog struct {
 	Image       *map[string]string `json:"titleImage"`
 	Excerpt     *string            `json:"excerpt"`
 	Label       *string            `json:"label"`
+	Author      *Author            `json:"author"`
 }
 
 type BlogResponse struct {
